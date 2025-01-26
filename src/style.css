@@ -12,6 +12,9 @@ body {
     grid-template-columns: repeat(10, 30px);
     grid-template-rows: repeat(10, 30px);
     gap: 5px;
+    width: 600px;
+    height: 600px;
+    /* Add any additional styles you need */
   }
   
   .cell {
@@ -24,4 +27,3 @@ body {
     cursor: pointer;
     font-size: 18px;
   }
-  
