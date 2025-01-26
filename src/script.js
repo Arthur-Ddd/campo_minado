@@ -73,9 +73,6 @@ function generateMaze(row, col) {
   }
 }
 
-// Start maze generation from the top-left corner
-generateMaze(0, 0);
-
 // Function to render the maze on the game board
 function renderMaze() {
   const gameBoard = document.getElementById('game-board');
@@ -96,5 +93,48 @@ function renderMaze() {
   }
 }
 
+function ScapeFromMaze() {
+  let player_x = 0;
+  let player_y = 0;
+  const scape_x = rows - 1;
+  const scape_y = cols - 1;
+
+  document.addEventListener('keydown', (event) => {
+    switch (event.key) {
+      case 'ArrowUp':
+        player_x - 1 >= 0 ? player_x-- : player_x;
+        break;
+      case 'ArrowRight':
+        player_y + 1 < cols ? player_y++ : player_y;
+        break;
+      case 'ArrowDown':
+        player_x + 1 < rows ? player_x++ : player_x;
+        break;
+      case 'ArrowLeft':
+        player_y - 1 >= 0 ? player_y-- : player_y;
+        break;
+    }
+    updateGrid(player_x, player_y);
+
+    if (player_x === scape_x && player_y === scape_y) {
+      const message = document.createElement('div');
+      message.innerText = 'You have reached the end of the maze!';
+      document.body.appendChild(message);
+    }
+  });
+}
+
+function updateGrid(x, y) {
+  const gameBoard = document.getElementById('game-board');
+  const cells = gameBoard.children;
+  const cell = cells[x * cols + y];
+  cell.style.backgroundColor = 'red';
+}
+
+// Start maze generation from the top-left corner
+generateMaze(0, 0);
+
 // Render the generated maze
 renderMaze();
+
+ScapeFromMaze();
